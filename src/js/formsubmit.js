@@ -9,7 +9,7 @@ export default async function formSubmitted(event) {
     event.preventDefault();
     const searchTerm = input.value;
   try {
-  const results = await getResults(searchTerm)
+  const results = await getResults(searchTerm);
   showResults(results);
   } catch(error) {
     showError(error);
