@@ -8,6 +8,5 @@ https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200502T1
  */
 
 const form = document.querySelector('form');
-/* трабл */
 form.addEventListener('submit', formSubmitted)
 window.addEventListener('onload', onloadResults())

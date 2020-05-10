@@ -17,21 +17,28 @@
   <div class="wropper">
     <header class="header-content">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand mx-auto" href="#">Movie Search<img src="/img/video.svg" alt="Movie Search logo" width="40" height="45"></a>
-        
+        <a class="navbar-brand mx-auto" href="#">Movie Search<img src="img/untitled.svg" alt="Movie Search logo" width="40" height="45"></a>
       </nav>
       
     </header>
     <main class="container-fluid m-2" style="max-width: 98%;">
       <form>
-        
         <fieldset class="form-group">
           <label for="searchTerm">Search for Movie</label>
           <div class="row">
-            <input type="search" class="d-inline form-control mr-sm-2 col-9" id="searchTerm" placeholder="Enter a movie title." autofocus autocomplete="on" pattern="(^[А-я0-9\s]+)(?!.*[A-z])$|(^[A-z0-9\s]+)(?!.*[А-я])$">
+            <input type="search" class="d-inline form-control mr-sm-2 col-9" id="searchTerm" placeholder="Enter a movie title." autofocus autocomplete="on" pattern="(^[А-я0-9\s]+)(?!.*[A-z])$|(^[A-z0-9\s]+)(?!.*[А-я])$" title="Type only one language, without mixing in search field.">
             <button type="submit" class="btn btn-primary col-2">FIND</button>
           </div>
         </fieldset>
+        <div id="preload" style="display:none">
+          <div id="fountainG_1" class="preload"></div>
+          <div id="fountainG_2" class="preload"></div>
+          <div id="fountainG_3" class="preload"></div>
+          <div id="fountainG_4" class="preload"></div>
+        </div>
+        <div class="alert alert-danger mr-4 m-2" role="alert" id="alert" style="display: none;">
+          <button type="button" class="close" data-dismiss="alert" onclick="this.parentNode.style.display='none';">×</button>
+        </div>
       </form>
       <section class="mt-2 row">
         <div class="swiper-container">

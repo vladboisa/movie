@@ -2,8 +2,10 @@ import mySwiper from './swiper';
 import showError from './showerror'
 
 const API_URL = 'https://www.omdbapi.com/?apikey=339cac3&?type=movie&s=';
+const API_URL_PAGE = '&page=';
 
 export async function showResults(results) {
+  if (results!==undefined) {
   mySwiper.removeAllSlides();
     results.forEach(movie => {
       mySwiper.appendSlide([`<div class="swiper-slide"><div class="card text-white bg-dark">
@@ -15,15 +17,14 @@ export async function showResults(results) {
       </div>`])
       mySwiper.update();
     })
-
-  
+  }  
 }
 export async function getResults(searchTerm) {
   const url = `${API_URL}${searchTerm}`;
   const response = await fetch(url)
   const data = await response.json();
   if (data.Error) {
-    throw new Error (data.Error)
+    showError(data.Error);
   }
   return data.Search;
 }
