@@ -14,19 +14,19 @@
 </head>
 
 <body>
-  <div class="wropper">
+  <div class="wrapper">
     <header class="header-content">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand mx-auto" href="#">Movie Search<img src="img/untitled.svg" alt="Movie Search logo" width="40" height="45"></a>
       </nav>
-      
+
     </header>
     <main class="container-fluid m-2" style="max-width: 98%;">
       <form>
         <fieldset class="form-group">
           <label for="searchTerm">Search for Movie</label>
           <div class="row">
-            <input type="search" class="d-inline form-control mr-sm-2 col-9" id="searchTerm" placeholder="Enter a movie title." autofocus autocomplete="on" pattern="(^[А-я0-9\s]+)(?!.*[A-z])$|(^[A-z0-9\s]+)(?!.*[А-я])$" title="Type only one language, without mixing in search field.">
+            <input type="search" class="d-inline form-control mr-sm-2 col-9" id="searchTerm" placeholder="Enter a movie title." autofocus autocomplete="on" pattern="(^[А-яёЁ0-9\s]+)(?!.*[A-z])$|(^[A-z0-9\s]+)(?!.*[А-яёЁ])$" title="Type only one language, without mixing in search field.">
             <button type="submit" class="btn btn-primary col-2">FIND</button>
           </div>
         </fieldset>
@@ -42,22 +42,13 @@
       </form>
       <section class="mt-2 row">
         <div class="swiper-container">
-          <!-- Additional required wrapper -->
           <div class="swiper-wrapper" id="results">
-            <!-- Slides -->
           </div>
-          <!-- If we need pagination -->
           <div class="swiper-pagination"></div>
-
-          <!-- If we need navigation buttons -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-
-          <!-- If we need scrollbar -->
           <div class="swiper-scrollbar"></div>
         </div>
-
-
       </section>
     </main>
 
