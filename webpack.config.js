@@ -8,147 +8,146 @@ const isDev = ENV === 'dev';
 const isProd = ENV === 'build';
 
 function setDevTool() {
-  if (isDev) {
-    return 'cheap-module-eval-source-map';
-  } else {
-    return 'none';
-  }
+    if (isDev) {
+        return 'cheap-module-eval-source-map';
+    } else {
+        return 'none';
+    }
 }
 
 function setDMode() {
-  if (isProd) {
-    return 'production';
-  } else {
-    return 'development';
-  }
+    if (isProd) {
+        return 'production';
+    } else {
+        return 'development';
+    }
 }
 
 const config = {
-  target: "web",
-  entry: {index: './src/js/index.js'},
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
-  },
-  mode: setDMode(),
-  devtool: setDevTool(),
-  module: {
-    rules: [{
-        test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-          options: {
-            minimize: false,
-          }
-        }]
-      },
-      {
-        test: /\.js$/,
-        use: ['babel-loader'/* , 'eslint-loader' */],
-        exclude: [
-          /node_modules/
-        ]
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
+    target: "web",
+    entry: { index: './src/js/index.js' },
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js'
+    },
+    mode: setDMode(),
+    devtool: setDevTool(),
+    module: {
+        rules: [{
+                test: /\.html$/,
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        minimize: false,
+                    }
+                }]
+            },
+            {
+                test: /\.js$/,
+                use: ['babel-loader' /* , 'eslint-loader' */ ],
+                exclude: [
+                    /node_modules/
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: 'postcss-loader',
+                        options: { sourceMap: true, config: { path: './postcss.config.js' } }
+                    }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }, {
+                        loader: 'postcss-loader',
+                        options: { sourceMap: true, config: { path: './postcss.config.js' } }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.(jpe?g|png|svg|gif)$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'img',
+                        name: 'img/[name].[ext]'
+                    }
+                }]
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'fonts',
+                        name: 'fonts/[name].[ext]',
+                    }
+                }]
+            },
+            {
+                test: /\.mp3$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'audio',
+                        name: 'audio/[name].[ext]'
+                    }
+                }]
             }
-          }, {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
-          }
         ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
-          }, {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(jpe?g|png|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'img',
-              name: 'img/[name].[ext]'
-            }}
-        ]
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: 'fonts',
-            name: 'fonts/[name].[ext]',
-          }
-        }]
-      },
-      {
-        test: /\.mp3$/,
-        use: [{
-        loader: 'file-loader',
-        options: {
-          outputPath: 'audio',
-          name: 'audio/[name].[ext]'
-        }
-      }]
-      }
-    ]
-  },
+    },
 
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'style.css',
-    }),
-    new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-      inject: false,
-    }),
-    new CopyWebpackPlugin([
-      // {from: './src/static', to: './'},
-     {from: './src/img', to: './img/'}
-    ])
-  ],
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'style.css',
+        }),
+        new HtmlWebPackPlugin({
+            template: './src/index.html',
+            filename: './index.html',
+            inject: false,
+        }),
+        new CopyWebpackPlugin([
+            // {from: './src/static', to: './'},
+            { from: './src/img', to: './img/' }
+        ])
+    ],
 
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 3000,
-    overlay: true,
-    stats: 'errors-only',
-    clientLogLevel: 'none'
-  }
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 3000,
+        overlay: true,
+        stats: 'errors-only',
+        clientLogLevel: 'none'
+    }
 }
 
 if (isProd) {
-  config.plugins.push(
-    new TerserPlugin(),
-  );
+    config.plugins.push(
+        new TerserPlugin(),
+    );
 };
 
 module.exports = config;

@@ -10,3 +10,8 @@ export function hideError() {
   alertField.lastChild.textContent = '';
   alertField.style.display = "none";
 }
+export function showErrorEmptyInput() {
+  alertField.lastChild.textContent = '';
+  alertField.insertAdjacentText("beforeend", `Can't find empty movie title`)
+  alertField.style.display = "block";
+}
